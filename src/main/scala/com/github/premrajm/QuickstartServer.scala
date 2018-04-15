@@ -5,13 +5,14 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
-import com.github.premrajm.route.UserRoutes
+import com.github.premrajm.route.{ ActuatorRoutes, UserRoutes }
+import akka.http.scaladsl.server.Directives._
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
 //#main-class
-object QuickstartServer extends App with UserRoutes {
+object QuickstartServer extends App with UserRoutes with ActuatorRoutes {
 
   // set up ActorSystem and other dependencies here
   //#main-class
@@ -22,7 +23,7 @@ object QuickstartServer extends App with UserRoutes {
 
   //#main-class
   // from the UserRoutes trait
-  lazy val routes: Route = userRoutes
+  lazy val routes: Route = userRoutes ~ healthRoutes
   //#main-class
 
   //#http-server

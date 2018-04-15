@@ -1,6 +1,6 @@
 package com.github.premrajm.service
 
-import play.api.libs.json.{Json, OWrites, Reads}
+import play.api.libs.json.{ Json, OWrites, Reads }
 
 import scala.util.Random
 
