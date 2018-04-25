@@ -1,6 +1,6 @@
 package com.github.premrajm.service
 
-import play.api.libs.json.{ Json, OWrites, Reads }
+import com.github.premrajm.model.{ User, Users }
 
 import scala.util.Random
 
@@ -15,23 +15,6 @@ sealed trait UserService {
   def delete(id: String): Option[User] = ???
 
 }
-
-//#user-case-classes
-final case class User(id: String, name: String, countryOfResidence: String)
-
-final case class Users(users: Seq[User])
-
-object User {
-  implicit val userRead: Reads[User] = Json.reads[User]
-  implicit val userWrites: OWrites[User] = Json.writes[User]
-}
-
-object Users {
-  implicit val usersRead: Reads[Users] = Json.reads[Users]
-  implicit val usersWrites: OWrites[Users] = Json.writes[Users]
-}
-
-//#user-case-classes
 
 class UserServiceImpl extends UserService {
 

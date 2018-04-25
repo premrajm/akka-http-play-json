@@ -8,7 +8,8 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.MethodDirectives.{ delete, get, post }
 import akka.http.scaladsl.server.directives.PathDirectives.path
 import akka.http.scaladsl.server.directives.RouteDirectives.complete
-import com.github.premrajm.service.{ User, UserService, UserServiceImpl }
+import com.github.premrajm.model.User
+import com.github.premrajm.service.{ UserService, UserServiceImpl }
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
 
 //#user-routes-class

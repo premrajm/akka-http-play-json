@@ -5,7 +5,7 @@ package com.github.premrajm.route
 import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.testkit.ScalatestRouteTest
-import com.github.premrajm.service.{ User, Users }
+import com.github.premrajm.model.{ User, Users }
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{ Matchers, WordSpec }
 
