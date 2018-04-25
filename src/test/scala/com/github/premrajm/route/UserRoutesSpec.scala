@@ -5,7 +5,7 @@ package com.github.premrajm.route
 import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.testkit.ScalatestRouteTest
-import com.github.premrajm.model.{ User, Users }
+import com.github.premrajm.model.{ RegularUser, User, Users }
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{ Matchers, WordSpec }
 
@@ -14,7 +14,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
     with UserRoutes {
 
   lazy val routes = userRoutes
-  val expectedUser = User("100", "Marcus Cruz", "Austria")
+  val expectedUser = RegularUser("100", "Marcus Cruz")
 
   //#set-up
 
@@ -39,7 +39,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
 
     //#testing-post
     "be able to add users (POST /users)" in {
-      val user = User("", "Manoj", "India")
+      val user = RegularUser("", "Manoj")
       val userEntity = Marshal(user).to[MessageEntity].futureValue // futureValue is from ScalaFutures
 
       // using the RequestBuilding DSL:
@@ -52,7 +52,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
         contentType should ===(ContentTypes.`application/json`)
 
         // and we know what message we're expecting back:
-        entityAs[User].name === "Manoj"
+        entityAs[RegularUser].name === "Manoj"
       }
     }
     //#testing-post
@@ -68,7 +68,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
         contentType should ===(ContentTypes.`application/json`)
 
         // and no entries should be in the list:
-        entityAs[User] === expectedUser
+        entityAs[RegularUser] === expectedUser
       }
     }
     //#actual-test

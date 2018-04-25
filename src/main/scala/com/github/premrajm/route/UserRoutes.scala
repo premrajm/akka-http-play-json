@@ -8,7 +8,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.MethodDirectives.{ delete, get, post }
 import akka.http.scaladsl.server.directives.PathDirectives.path
 import akka.http.scaladsl.server.directives.RouteDirectives.complete
-import com.github.premrajm.model.User
+import com.github.premrajm.model.RegularUser
 import com.github.premrajm.service.{ UserService, UserServiceImpl }
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
 
@@ -37,7 +37,7 @@ trait UserRoutes extends PlayJsonSupport {
               complete(service.getAll)
             },
             post {
-              entity(as[User]) { user =>
+              entity(as[RegularUser]) { user =>
                 userRoutesLog.info("Created user [{}]", user)
                 complete(StatusCodes.Created, service.add(user))
               }

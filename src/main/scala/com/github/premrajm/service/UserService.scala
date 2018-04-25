@@ -1,40 +1,40 @@
 package com.github.premrajm.service
 
-import com.github.premrajm.model.{ User, Users }
+import com.github.premrajm.model.{ RegularUser, User, Users }
 
 import scala.util.Random
 
 sealed trait UserService {
 
-  def find(id: String): Option[User] = ???
+  def find(id: String): Option[RegularUser] = ???
 
   def getAll: Users = ???
 
-  def add(user: User): User = ???
+  def add(user: RegularUser): RegularUser = ???
 
-  def delete(id: String): Option[User] = ???
+  def delete(id: String): Option[RegularUser] = ???
 
 }
 
 class UserServiceImpl extends UserService {
 
   private val users = List(
-    User("100", "Marcus Cruz", "Austria")
+    RegularUser("100", "Marcus Cruz")
   )
 
   private def id: String = Random.alphanumeric take 16 mkString
 
-  private val usersMap = scala.collection.mutable.Map[String, User]() ++= (users map (u => u.id -> u) toMap)
+  private val usersMap = scala.collection.mutable.Map[String, RegularUser]() ++= (users map (u => u.id -> u) toMap)
 
-  override def find(id: String): Option[User] = usersMap.get(id)
+  override def find(id: String): Option[RegularUser] = usersMap.get(id)
 
-  override def add(user: User): User = {
-    val saved = User(id, user.name, user.countryOfResidence)
+  override def add(user: RegularUser): RegularUser = {
+    val saved = RegularUser(id, user.name)
     usersMap += saved.id -> saved
     saved
   }
 
   override def getAll: Users = Users(usersMap.values.toSeq)
 
-  override def delete(id: String): Option[User] = usersMap remove id
+  override def delete(id: String): Option[RegularUser] = usersMap remove id
 }

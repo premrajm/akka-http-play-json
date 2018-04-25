@@ -16,6 +16,7 @@ lazy val root = (project in file(".")).
       "com.typesafe.akka" %% "akka-stream"          % akkaVersion,
       "com.beachape" %% "enumeratum" % "1.5.13",
       "com.beachape" %% "enumeratum-play-json" % "1.5.14",
+      "ai.x" %% "play-json-extensions" % "0.10.0",
 
       "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % Test,
       "com.typesafe.akka" %% "akka-testkit"         % akkaVersion     % Test,
